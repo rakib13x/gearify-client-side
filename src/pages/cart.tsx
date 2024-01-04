@@ -48,7 +48,7 @@ const Cart = () => {
         <p>ShippingCharges: ${shippingCharges}</p>
         <p>Tax: ${tax}</p>
         <p>
-          Discount: <em> - ${discount}</em>
+          Disc: <em> - ${discount}</em>
         </p>
         <p>
           <b>Total: ${total}</b>
