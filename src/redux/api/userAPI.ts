@@ -6,7 +6,9 @@ import { User } from "../../types/types";
 export const userAPI = createApi({
   reducerPath: "userApi",
   // /api/v1/user/new
-  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1/user/` }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/user/`,
+  }),
   endpoints: (builder) => ({
     login: builder.mutation<MessageResponse, User>({
       query: (user) => ({
@@ -17,3 +19,5 @@ export const userAPI = createApi({
     }),
   }),
 });
+
+export const { useLoginMutation } = userAPI;
