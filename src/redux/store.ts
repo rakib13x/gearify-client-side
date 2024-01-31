@@ -14,3 +14,5 @@ export const store = configureStore({
   //@ts-ignore
   middleware: (mid) => [...mid(), userAPI.middleware, productAPI.middleware],
 });
+
+export type RootState = ReturnType<typeof store.getState>;
