@@ -44,7 +44,7 @@ const Search = () => {
   const isNextPage = true;
 
   if (isError) {
-    const err = error as CustomError;
+    const err = productError as CustomError;
     toast.error(err.data.message);
   }
   if (productIsError) {
