@@ -1,8 +1,12 @@
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
-import { useCategoriesQuery } from "../redux/api/productAPI";
+import {
+  useCategoriesQuery,
+  useSearchProductsQuery,
+} from "../redux/api/productAPI";
 import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
+import { Skeleton } from "../components/Loader";
 
 const Search = () => {
   const {
@@ -17,6 +21,21 @@ const Search = () => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
+  const {
+    isLoading: productLoading,
+    data: searchedData,
+    isError: productIsError,
+    error: productError,
+  } = useSearchProductsQuery({
+    search,
+    sort,
+    category,
+    page,
+    price: maxPrice,
+  });
+
+  console.log(searchedData);
+
   const addToCartHandler = () => {
     console.log("product added.");
   };
@@ -25,6 +44,10 @@ const Search = () => {
   const isNextPage = true;
 
   if (isError) {
+    const err = error as CustomError;
+    toast.error(err.data.message);
+  }
+  if (productIsError) {
     const err = error as CustomError;
     toast.error(err.data.message);
   }
@@ -74,33 +97,43 @@ const Search = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <div className="search-product-list">
-          <ProductCard
-            productId="kdjfk"
-            name="macbook"
-            price={23}
-            stock={323}
-            handler={addToCartHandler}
-            photo="https://i.ibb.co/ncT3k4X/format-arw-PXj-Qa-Gxi4-JA-unsplash.jpg"
-          />
-        </div>
-        <article>
-          <button
-            disabled={!isPrevPage}
-            onClick={() => setPage((prev) => prev - 1)}
-          >
-            prev
-          </button>
-          <span>
-            {page} of {4}
-          </span>
-          <button
-            disabled={!isNextPage}
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            next
-          </button>
-        </article>
+
+        {productLoading ? (
+          <Skeleton length={10} />
+        ) : (
+          <div className="search-product-list">
+            {searchedData?.products.map((i) => (
+              <ProductCard
+                key={i._id}
+                productId={i._id}
+                name={i.name}
+                price={i.price}
+                stock={i.stock}
+                handler={addToCartHandler}
+                photo={i.photo}
+              />
+            ))}
+          </div>
+        )}
+        {searchedData && searchedData?.totalPage > 1 && (
+          <article>
+            <button
+              disabled={!isPrevPage}
+              onClick={() => setPage((prev) => prev - 1)}
+            >
+              prev
+            </button>
+            <span>
+              {page} of {searchedData.totalPage}
+            </span>
+            <button
+              disabled={!isNextPage}
+              onClick={() => setPage((prev) => prev + 1)}
+            >
+              next
+            </button>
+          </article>
+        )}
       </main>
     </div>
   );
