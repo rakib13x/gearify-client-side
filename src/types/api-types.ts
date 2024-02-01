@@ -1,4 +1,4 @@
-import { Product, User } from "./types";
+import { Bar, Line, Pie, Product, Stats, User } from "./types";
 
 export type CustomError = {
   status: number;
@@ -41,4 +41,29 @@ export type SearchProductsRequest = {
   category: string;
   search: string;
   sort: string;
+};
+
+export type NewProductRequest = {
+  id: string;
+  formData: FormData;
+};
+
+export type StatsResponse = {
+  success: boolean;
+  stats: Stats;
+};
+
+export type PieResponse = {
+  success: boolean;
+  charts: Pie;
+};
+
+export type BarResponse = {
+  success: boolean;
+  charts: Bar;
+};
+
+export type LineResponse = {
+  success: boolean;
+  charts: Line;
 };
