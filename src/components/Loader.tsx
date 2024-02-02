@@ -1,5 +1,3 @@
-import { count } from "firebase/firestore";
-
 const Loader = () => {
   return <div>Loading...</div>;
 };
