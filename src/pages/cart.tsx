@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartReducerInitialState } from "../types/reducer-types";
 
-import { addToCart, removeCartItem } from "../redux/reducer/cartReducer";
+import {
+  addToCart,
+  calculatePrice,
+  removeCartItem,
+} from "../redux/reducer/cartReducer";
 import { CartItemType } from "../types/types";
 import { RiErrorWarningLine } from "react-icons/ri";
 
@@ -53,6 +57,10 @@ const Cart = () => {
       setIsValidCouponCode(false);
     };
   }, [couponCode]);
+
+  useEffect(() => {
+    dispatch(calculatePrice());
+  }, [cartItems]);
   return (
     <div className="cart">
       <main>
