@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RiErrorWarningLine, RiH1 } from "react-icons/ri";
+
 import CartItemCard from "../components/CartItem";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { cartReducerInitialState } from "../types/reducer-types";
 
 import { addToCart, removeCartItem } from "../redux/reducer/cartReducer";
 import { CartItemType } from "../types/types";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 // const cartItems = [
 //   {
