@@ -14,6 +14,7 @@ const Home = () => {
   const addToCartHandler = (cartItem: CartItemType) => {
     if (cartItem.stock < 1) return toast.error("Out of Stock.");
     dispatch(addToCart(cartItem));
+    toast.success("Product added to cart.");
   };
 
   if (isError) toast.error("Cannot Fetch the Products.");
