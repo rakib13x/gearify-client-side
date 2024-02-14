@@ -4,6 +4,7 @@ import { userReducer } from "./reducer/userReducer";
 import { productAPI } from "./api/productAPI";
 import { dashboardApi } from "./api/dashboardAPI";
 import { cartReducer } from "./reducer/cartReducer";
+import { orderApi } from "./api/orderAPI";
 
 export const server = import.meta.env.VITE_SERVER;
 
@@ -15,6 +16,7 @@ export const store = configureStore({
     [userReducer.name]: userReducer.reducer,
     [cartReducer.name]: cartReducer.reducer,
     [dashboardApi.reducerPath]: dashboardApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
   },
   //@ts-ignore
   middleware: (mid) => [
@@ -22,6 +24,7 @@ export const store = configureStore({
     userAPI.middleware,
     productAPI.middleware,
     dashboardApi.middleware,
+    orderApi.middleware,
   ],
 });
 
