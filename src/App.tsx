@@ -19,7 +19,7 @@ const Cart = lazy(() => import("./pages/cart"));
 const Shipping = lazy(() => import("./pages/Shipping"));
 const Orders = lazy(() => import("./pages/Orders"));
 const OrdersDetails = lazy(() => import("./pages/Orders-Details"));
-
+const NotFound = lazy(() => import("./pages/not-found"));
 const Login = lazy(() => import("./pages/Login"));
 
 // Admin Routes Importing
@@ -118,6 +118,7 @@ const App = () => {
               element={<TransactionManagement />}
             />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Toaster position="bottom-center" />
